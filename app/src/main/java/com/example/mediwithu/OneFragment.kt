@@ -2,6 +2,7 @@ package com.example.mediwithu
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -85,6 +86,17 @@ class OneFragment : Fragment() {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             intent.putExtra("today", dateFormat.format(System.currentTimeMillis()))
             requestLauncher.launch(intent)
+        }
+
+        binding.btnCall.setOnClickListener{
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:010-1234-5678")
+            startActivity(intent)
+        }
+        binding.btnMessage.setOnClickListener{
+            val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:010-1234-5678"))
+            intent.putExtra("sms_body", "약 드실 시간이예요~")
+            startActivity(intent)
         }
         return binding.root
     }
