@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.mediwithu.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){
@@ -50,6 +52,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val fadapter = MyFragmentPagerAdapter(this)
         binding.viewpager.adapter = fadapter
+
+        TabLayoutMediator(binding.tabs, binding.viewpager){
+            tab, position -> tab.text = "TAB ${position + 1}"
+        }.attach()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
