@@ -18,12 +18,14 @@ import com.example.mediwithu.databinding.ItemRecyclerviewBinding
 
 // 2 각 항목의 뷰를 재활용하기 위해 보관하는 클래스
 class MyViewHolder(val binding: ItemRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root)
-
+data class MyItem(
+    val totake: String,
+    val time: String
+)
 // 2 뷰를 뷰의 데이터에 바인딩
-class MyAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-    override fun getItemCount(): Int {
-        return datas.size;
-    }
+class MyAdapter(val datas: MutableList<MyItem>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+    override fun getItemCount(): Int = datas.size
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MyViewHolder(
@@ -36,19 +38,10 @@ class MyAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerVi
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding = (holder as MyViewHolder).binding
-        binding.itemData.text = datas[position]
+        val item = datas[position]
 
-        binding.itemRoot.setOnClickListener {   // it : View!
-            Toast.makeText(it.context, "${datas[position]}이 선택되었습니다", Toast.LENGTH_SHORT).show()
-
-            AlertDialog.Builder(it.context).run {
-                setTitle("알림")
-                setIcon(android.R.drawable.ic_dialog_alert)
-                setMessage("${datas[position]}이 선택되었습니다")
-                setPositiveButton("예", null)
-                show()
-            }
-        }
+        binding.itemData.text = item.totake
+        binding.itemTime.text = item.time
     }
 }
 
@@ -64,14 +57,14 @@ class MyDecoration(val context: Context): RecyclerView.ItemDecoration() {
         val width = parent.width
         val height = parent.height
 
-        //val dr: Drawable? = ResourcesCompat.getDrawable(context.resources, R.drawable.kbo, null)
-        //val drWidth = dr?.intrinsicWidth
-        //val drHeight = dr?.intrinsicHeight
+        val dr: Drawable? = ResourcesCompat.getDrawable(context.resources, R.drawable.yswu_logo, null)
+        val drWidth = dr?.intrinsicWidth
+        val drHeight = dr?.intrinsicHeight
 
-        //val left = width/2 - drWidth?.div(2) as Int
-        //val top = height/2 - drHeight?.div(2) as Int
+        val left = width/2 - drWidth?.div(2) as Int
+        val top = height/2 - drHeight?.div(2) as Int
 
-        //c.drawBitmap(BitmapFactory.decodeResource(context.resources, R.drawable.kbo), left.toFloat(), top.toFloat(), null)
+        c.drawBitmap(BitmapFactory.decodeResource(context.resources, R.drawable.yswu_logo), left.toFloat(), top.toFloat(), null)
     }
 
     override fun getItemOffsets(
@@ -88,7 +81,7 @@ class MyDecoration(val context: Context): RecyclerView.ItemDecoration() {
         else
             outRect.set(10, 10, 10, 0)
 
-        view.setBackgroundColor(Color.parseColor("#28A0FF"))
+        view.setBackgroundColor(Color.parseColor("#A0CDBB"))
         ViewCompat.setElevation(view, 20.0f)
     }
 }

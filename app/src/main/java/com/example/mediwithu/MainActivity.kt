@@ -21,7 +21,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){
     val fragments: List<Fragment>
     init{
-        fragments = listOf(OneFragment(), TwoFragment())
+        fragments = listOf(ThreeFragment(), OneFragment(), TwoFragment())
     }
 
     override fun getItemCount(): Int = fragments.size

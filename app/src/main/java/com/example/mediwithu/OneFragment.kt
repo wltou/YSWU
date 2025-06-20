@@ -3,16 +3,19 @@ package com.example.mediwithu
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.registerForActivityResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mediwithu.databinding.FragmentOneBinding
 import java.text.SimpleDateFormat
+import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,13 +48,15 @@ class OneFragment : Fragment() {
         val binding = FragmentOneBinding.inflate(inflater, container, false)
 
 
-        var datas = mutableListOf<String>()
+        var datas = mutableListOf<MyItem>()
         val db = DBHelper(inflater.context).readableDatabase
 
         val cursor = db.rawQuery("select * from TOTAKE_TB", null)
         cursor.run{
             while(moveToNext()){
-                datas.add(cursor.getString(1))
+                val totake = getString(getColumnIndexOrThrow("totake"))
+                val time = getString(getColumnIndexOrThrow("time"))
+                datas.add(MyItem(totake, time))
             }
         }
         db.close()
@@ -65,16 +70,19 @@ class OneFragment : Fragment() {
 
         val requestLauncher: ActivityResultLauncher<Intent> =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                val totake = it.data!!.getStringExtra("result")
-                if(totake != ""){
-                    datas.add(totake!!)
+                val totake = it.data?.getStringExtra("result")
+                val time = it.data?.getStringExtra("time") ?: "None"
+                if(!totake.isNullOrEmpty()){
+                    datas.add(MyItem(totake, time))
                     radapter.notifyDataSetChanged()
                 }
+                else{
+                    Toast.makeText(context, "실패", Toast.LENGTH_SHORT).show()
+                }
             }
-
         binding.fab.setOnClickListener{
             val intent = Intent(it.context, AddActivity::class.java)
-            val dateFormat = SimpleDateFormat("")
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             intent.putExtra("today", dateFormat.format(System.currentTimeMillis()))
             requestLauncher.launch(intent)
         }
