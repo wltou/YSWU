@@ -1,0 +1,99 @@
+package com.example.mediwithu
+
+import android.os.Bundle
+import android.telecom.Call
+import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mediwithu.databinding.FragmentHospitalBinding
+import com.example.mediwithu.databinding.FragmentPharmBinding
+
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
+
+/**
+ * A simple [Fragment] subclass.
+ * Use the [HospitalFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class HospitalFragment : Fragment() {
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val binding = FragmentHospitalBinding.inflate(inflater, container, false)
+
+        val searchLoc = arguments?.getString("sidoCd") ?: ""
+        val call = RetrofitConnection.hospitalNetworkService.getHospitalList(
+            serviceKey = "e8ZNd0tpsB2pT09x5R1A7Y3hQuPKd1XkkrXSjLtCdvFi2BwcGhyMkDQtMlvCub0SuAuwJ6Edd1xB38kwdl1NUQ==",
+            sidoCd = searchLoc
+        )
+        val request = call.request()
+        Log.d("API_CALL", "Request URL: ${request}")
+
+        call.enqueue(object : retrofit2.Callback<HospitalResponse> {
+            override fun onResponse(
+                call: retrofit2.Call<HospitalResponse>,
+                response: retrofit2.Response<HospitalResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val hospitalList = response.body()?.body?.items?.item ?: emptyList()
+
+                    // RecyclerView Adapter에 데이터 연결
+                    val adapter = HospitalAdapter(hospitalList.toMutableList())
+                    binding.hospitalRecyclerView.adapter = adapter
+                    binding.hospitalRecyclerView.layoutManager = LinearLayoutManager(context)
+
+                } else {
+                    Toast.makeText(context, "병원 정보 불러오기 실패", Toast.LENGTH_SHORT).show()
+                    Log.e("API_ERROR", "Response code: ${response.code()}, message: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<HospitalResponse>, t: Throwable) {
+                Toast.makeText(context, "통신 실패: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        return binding.root
+    }
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment HospitalFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            HospitalFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
+}
