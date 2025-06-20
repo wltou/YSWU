@@ -1,0 +1,31 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="복약 파트너 정보">
+
+        <EditTextPreference
+            app:key="partner_id"
+            app:title="복약 파트너 ID"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:key="partner_name"
+            app:title="복약 파트너 이름"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            app:key="partner_tel"
+            app:title="전화번호"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="기타">
+
+        <EditTextPreference
+            app:key="default_message_pre"
+            app:title="자동 입력 문자 내용"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -51,6 +51,7 @@ class MyDecoration(val context: Context): RecyclerView.ItemDecoration() {
     //    super.onDrawOver(c, parent, state)
 
     // onDraw() : KBO -> ItemView
+    /*
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
 
@@ -65,7 +66,7 @@ class MyDecoration(val context: Context): RecyclerView.ItemDecoration() {
         val top = height/2 - drHeight?.div(2) as Int
 
         c.drawBitmap(BitmapFactory.decodeResource(context.resources, R.drawable.yswu_logo), left.toFloat(), top.toFloat(), null)
-    }
+    }*/
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -81,7 +82,7 @@ class MyDecoration(val context: Context): RecyclerView.ItemDecoration() {
         else
             outRect.set(10, 10, 10, 0)
 
-        view.setBackgroundColor(Color.parseColor("#A0CDBB"))
+        view.setBackgroundColor(Color.parseColor("#CEDFD7"))
         ViewCompat.setElevation(view, 20.0f)
     }
 }

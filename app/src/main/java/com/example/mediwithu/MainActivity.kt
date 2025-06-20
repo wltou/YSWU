@@ -1,6 +1,8 @@
 package com.example.mediwithu
 
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.preference.PreferenceManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.mediwithu.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
@@ -31,14 +34,22 @@ class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(a
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var binding: ActivityMainBinding
     lateinit var toggle: ActionBarDrawerToggle
+    lateinit var sharedPreference : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sharedPreference = PreferenceManager.getDefaultSharedPreferences(this)
+        val emailPre = sharedPreference.getString("id", "${MyApplication.email}")
+        val idPre = sharedPreference.getString("id", "${emailPre}")
+        val colorPre = sharedPreference.getString("color", "#355E45")
+
+        binding.toolbar.setTitleTextColor(Color.parseColor(colorPre))
+
         if(MyApplication.checkAuth() || MyApplication.email != null){
-            binding.toolbar.title = "${MyApplication.email} 님"
+            binding.toolbar.title = "${idPre} 님"
         }
         else{
             binding.toolbar.title = "MediWithU"
@@ -46,9 +57,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setSupportActionBar(binding.toolbar)
 
+
+
         toggle = ActionBarDrawerToggle(this, binding.drawerMain, R.string.drawer_opened, R.string.drawer_closed)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toggle.syncState()
+
+        binding.drawer.setNavigationItemSelectedListener(this)
 
         val fadapter = MyFragmentPagerAdapter(this)
         binding.viewpager.adapter = fadapter
@@ -103,9 +118,33 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-
+            R.id.nav_setting -> {
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.nav_partner -> {
+                val intent = Intent(this, PartnerSettingActivity::class.java)
+                startActivity(intent)
+                return true
+            }
         }
-        return false
+        return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val idPre = sharedPreference.getString("id", "${MyApplication.email}")
+        val colorPre = sharedPreference.getString("color", "#355E45")
+
+        if(MyApplication.checkAuth() || MyApplication.email != null){
+            binding.toolbar.title = "${idPre} 님"
+        }
+        else{
+            binding.toolbar.title = "MediWithU"
+        }
+        binding.toolbar.setTitleTextColor(Color.parseColor(colorPre))
     }
 
 }

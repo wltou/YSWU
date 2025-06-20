@@ -2,6 +2,8 @@ package com.example.mediwithu
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.registerForActivityResult
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mediwithu.databinding.FragmentOneBinding
 import java.text.SimpleDateFormat
@@ -32,6 +35,7 @@ class OneFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var sharedPreference : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +66,13 @@ class OneFragment : Fragment() {
         }
         db.close()
 
+        sharedPreference= PreferenceManager.getDefaultSharedPreferences(requireActivity())
+        val partner_idPre = sharedPreference.getString("partner_id", "복약 파트너")
+        val partner_namePre = sharedPreference.getString("partner_name", "복약 파트너")
+        val partner_telPre = sharedPreference.getString("partner_tel", "")
+        val messagePre = sharedPreference.getString("default_message_pre", "${partner_idPre}! 오늘 하루 잘 보내고 계신가요? 약 챙기실 시간이예요~")
+
+
         val radapter = MyAdapter(datas)
 
         binding.RecyclerView.layoutManager = LinearLayoutManager(activity)
@@ -90,15 +101,30 @@ class OneFragment : Fragment() {
 
         binding.btnCall.setOnClickListener{
             val intent = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel:010-1234-5678")
+            intent.data = Uri.parse("tel:${partner_telPre}")
             startActivity(intent)
         }
         binding.btnMessage.setOnClickListener{
-            val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:010-1234-5678"))
-            intent.putExtra("sms_body", "약 드실 시간이예요~")
+            val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:${partner_telPre}"))
+            intent.putExtra("sms_body", "${messagePre}")
             startActivity(intent)
         }
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val idPre = sharedPreference.getString("id", "${MyApplication.email}")
+        val colorPre = sharedPreference.getString("color", "#355E45")
+
+        if(MyApplication.checkAuth() || MyApplication.email != null){
+            binding.toolbar.title = "${idPre} 님"
+        }
+        else{
+            binding.toolbar.title = "MediWithU"
+        }
+        binding.toolbar.setTitleTextColor(Color.parseColor(colorPre))
     }
 
     companion object {
