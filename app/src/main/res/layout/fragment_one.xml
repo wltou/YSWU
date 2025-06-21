@@ -12,6 +12,7 @@
         android:orientation="horizontal"
         android:id="@+id/meditationUser"
         android:background="@color/main_bg"
+        android:layout_marginTop="15dp"
         android:padding="5dp">
 
         <TextView
@@ -19,9 +20,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:text="환자 이름"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
         <Button

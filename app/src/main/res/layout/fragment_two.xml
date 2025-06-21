@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#ECFFE7"
     android:padding="5pt"
     tools:context=".MainActivity">
 
@@ -34,12 +35,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="병원 정보 조회"
+                android:buttonTint="@color/main_btn"
                 android:id="@+id/rbHospital"
                 android:checked="true"/>
             <RadioButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:buttonTint="@color/main_btn"
                 android:text="약국 정보 조회"
                 android:id="@+id/rbPharm" />
         </RadioGroup>
@@ -48,6 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:backgroundTint="@color/main_btn"
             android:text="검색" />
     </LinearLayout>
 

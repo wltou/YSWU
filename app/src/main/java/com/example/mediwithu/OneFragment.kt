@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.registerForActivityResult
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mediwithu.databinding.ActivityMainBinding
 import com.example.mediwithu.databinding.FragmentOneBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -35,6 +36,7 @@ class OneFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var binding: FragmentOneBinding
     lateinit var sharedPreference : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +52,7 @@ class OneFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding = FragmentOneBinding.inflate(inflater, container, false)
+        binding = FragmentOneBinding.inflate(inflater, container, false)
 
 
         var datas = mutableListOf<MyItem>()
@@ -70,7 +72,7 @@ class OneFragment : Fragment() {
         val partner_idPre = sharedPreference.getString("partner_id", "복약 파트너")
         val partner_namePre = sharedPreference.getString("partner_name", "복약 파트너")
         val partner_telPre = sharedPreference.getString("partner_tel", "")
-        val messagePre = sharedPreference.getString("default_message_pre", "${partner_idPre}! 오늘 하루 잘 보내고 계신가요? 약 챙기실 시간이예요~")
+        val messagePre = sharedPreference.getString("default_message_pre", "$partner_idPre! 오늘 하루 잘 보내고 계신가요? 약 챙기실 시간이예요~") ?: "오늘 하루 잘 보내고 계신가요? 약 챙기실 시간이예요~"
 
 
         val radapter = MyAdapter(datas)
@@ -79,6 +81,7 @@ class OneFragment : Fragment() {
 
         binding.RecyclerView.adapter = radapter
         binding.RecyclerView.addItemDecoration(MyDecoration(activity as Context))
+        binding.tvname.text = "${partner_idPre}"
 
         val requestLauncher: ActivityResultLauncher<Intent> =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -101,12 +104,12 @@ class OneFragment : Fragment() {
 
         binding.btnCall.setOnClickListener{
             val intent = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel:${partner_telPre}")
+            intent.data = Uri.parse("tel:$partner_telPre")
             startActivity(intent)
         }
         binding.btnMessage.setOnClickListener{
-            val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:${partner_telPre}"))
-            intent.putExtra("sms_body", "${messagePre}")
+            val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:$partner_telPre"))
+            intent.putExtra("sms_body", messagePre)
             startActivity(intent)
         }
         return binding.root
@@ -115,16 +118,10 @@ class OneFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        val idPre = sharedPreference.getString("id", "${MyApplication.email}")
-        val colorPre = sharedPreference.getString("color", "#355E45")
+        val partner_idPre = sharedPreference.getString("partner_id", "복약 파트너")
 
-        if(MyApplication.checkAuth() || MyApplication.email != null){
-            binding.toolbar.title = "${idPre} 님"
-        }
-        else{
-            binding.toolbar.title = "MediWithU"
-        }
-        binding.toolbar.setTitleTextColor(Color.parseColor(colorPre))
+        binding.tvname.text = "${partner_idPre}"
+
     }
 
     companion object {
