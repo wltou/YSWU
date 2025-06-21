@@ -6,6 +6,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.mediwithu.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
@@ -24,7 +28,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){
     val fragments: List<Fragment>
     init{
-        fragments = listOf(ThreeFragment(), OneFragment(), TwoFragment())
+        fragments = listOf(ThreeFragment(), OneFragment(), FourFragment(), TwoFragment())
     }
 
     override fun getItemCount(): Int = fragments.size
@@ -45,18 +49,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val emailPre = sharedPreference.getString("id", "${MyApplication.email}")
         val idPre = sharedPreference.getString("id", "${emailPre}")
         val colorPre = sharedPreference.getString("color", "#355E45")
+        val partner_idPre = sharedPreference.getString("partner_id", "복약 파트너")
 
         binding.toolbar.setTitleTextColor(Color.parseColor(colorPre))
 
         if(MyApplication.checkAuth() || MyApplication.email != null){
             binding.toolbar.title = "${idPre} 님"
+            binding.viewpageandtabs.visibility = View.VISIBLE
         }
         else{
             binding.toolbar.title = "MediWithU"
+            binding.viewpageandtabs.visibility = View.GONE
         }
 
         setSupportActionBar(binding.toolbar)
-
 
 
         toggle = ActionBarDrawerToggle(this, binding.drawerMain, R.string.drawer_opened, R.string.drawer_closed)
@@ -69,7 +75,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding.viewpager.adapter = fadapter
 
         TabLayoutMediator(binding.tabs, binding.viewpager){
-            tab, position -> tab.text = "TAB ${position + 1}"
+            tab, position -> tab.text = when(position) {
+                0 -> "홈"
+                1 -> "$partner_idPre"
+                2 -> "복약 일지"
+                3 -> "찾기"
+                else -> "기타"
+        }
         }.attach()
     }
 
@@ -107,12 +119,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onStart() {
         super.onStart()
 
+
         invalidateMenu()
         if(MyApplication.checkAuth() || MyApplication.email != null){
             binding.toolbar.title = "${MyApplication.email} 님"
+
+            binding.viewpageandtabs.visibility = View.VISIBLE
         }
         else{
             binding.toolbar.title = "MediWithU"
+            binding.viewpageandtabs.visibility = View.GONE
         }
     }
 

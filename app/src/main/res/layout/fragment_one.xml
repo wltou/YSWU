@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="5"
             android:layout_margin="10dp"
+            android:textColor="@color/black"
             android:text="환자 이름"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -35,7 +36,7 @@
             android:drawableLeft="@drawable/call_resize"
             android:drawablePadding="8dp"
             android:text="전화"
-            android:textColor="#212121"/>
+            android:textColor="@color/black"/>
 
         <Button
             android:layout_width="0dp"
@@ -46,7 +47,7 @@
             android:id="@+id/btnMessage"
             android:drawableLeft="@drawable/message_resize"
             android:text="문자"
-            android:textColor="#212121"/>
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 
@@ -64,7 +65,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
+        android:backgroundTint="@color/main_fab"
         app:icon="@android:drawable/ic_input_add"
+        android:textColor="@color/black"
         android:text="약 추가하기"/>
 
 </RelativeLayout>

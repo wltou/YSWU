@@ -4,10 +4,12 @@ import androidx.multidex.MultiDexApplication
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MyApplication : MultiDexApplication() {
     companion object{
         lateinit var auth : FirebaseAuth
+        lateinit var db : FirebaseFirestore
         var email:String? = null
 
         fun checkAuth() : Boolean{
@@ -31,5 +33,6 @@ class MyApplication : MultiDexApplication() {
         super.onCreate()
 
         auth = Firebase.auth
+        db = FirebaseFirestore.getInstance()
     }
 }

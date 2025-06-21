@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.mediwithu.databinding.FragmentFourBinding
+import android.content.Intent
+import androidx.recyclerview.widget.LinearLayoutManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +24,7 @@ class FourFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var binding: FragmentFourBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +39,74 @@ class FourFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_four, container, false)
+        binding = FragmentFourBinding.inflate(inflater, container, false)
+        binding.writeAddFab.setOnClickListener{
+            if(MyApplication.checkAuth()){
+                //AddActivity 호출
+                val intent = Intent(requireContext(), WriteAddActivity::class.java)
+                startActivity(intent)
+            }
+            else{
+                Toast.makeText(context, "인증을 먼저 해주세요.", Toast.LENGTH_LONG).show()
+            }
+        }
+        return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if(MyApplication.checkAuth() || MyApplication.email != null){
+
+            binding.diaryRecyclerView.visibility = View.VISIBLE
+
+            MyApplication.db.collection("diary")
+                .get()
+                .addOnSuccessListener { result ->
+                    var itemList = mutableListOf<ItemData>()
+                    for(document in result){
+                        val item = document.toObject(ItemData::class.java)
+                        item.docId = document.id
+                        itemList.add(item)
+                    }
+                    binding.diaryRecyclerView.layoutManager = LinearLayoutManager(context)
+                    binding.diaryRecyclerView.adapter = MyDiaryAdapter(itemList)
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, "Firebase로부터 데이터 획득에 실패했습니다.", Toast.LENGTH_LONG).show()
+                }
+        }
+        else{
+            binding.diaryRecyclerView.visibility = View.GONE
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if(MyApplication.checkAuth() || MyApplication.email != null){
+
+            binding.diaryRecyclerView.visibility = View.VISIBLE
+
+            MyApplication.db.collection("diary")
+                .get()
+                .addOnSuccessListener { result ->
+                    var itemList = mutableListOf<ItemData>()
+                    for(document in result){
+                        val item = document.toObject(ItemData::class.java)
+                        item.docId = document.id
+                        itemList.add(item)
+                    }
+                    binding.diaryRecyclerView.layoutManager = LinearLayoutManager(context)
+                    binding.diaryRecyclerView.adapter = MyDiaryAdapter(itemList)
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, "Firebase로부터 데이터 획득에 실패했습니다.", Toast.LENGTH_LONG).show()
+                }
+        }
+        else{
+            binding.diaryRecyclerView.visibility = View.GONE
+        }
     }
 
     companion object {
@@ -56,4 +128,5 @@ class FourFragment : Fragment() {
                 }
             }
     }
+
 }

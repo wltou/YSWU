@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ffaacc">
+    android:background="@color/main_bg">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/add_toolbar"
@@ -66,6 +66,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:text="저장"
+        android:backgroundTint="@color/main_btn"
         android:id="@+id/btnSave"
         android:layout_marginTop="200dp" />
 </LinearLayout>

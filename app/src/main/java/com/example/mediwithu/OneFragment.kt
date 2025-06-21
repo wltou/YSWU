@@ -70,7 +70,6 @@ class OneFragment : Fragment() {
 
         sharedPreference= PreferenceManager.getDefaultSharedPreferences(requireActivity())
         val partner_idPre = sharedPreference.getString("partner_id", "복약 파트너")
-        val partner_namePre = sharedPreference.getString("partner_name", "복약 파트너")
         val partner_telPre = sharedPreference.getString("partner_tel", "")
         val messagePre = sharedPreference.getString("default_message_pre", "$partner_idPre! 오늘 하루 잘 보내고 계신가요? 약 챙기실 시간이예요~") ?: "오늘 하루 잘 보내고 계신가요? 약 챙기실 시간이예요~"
 

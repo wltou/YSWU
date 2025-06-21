@@ -11,12 +11,14 @@
         android:id="@+id/item_time"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textSize="17dp"/>
     <TextView
         android:id="@+id/item_data"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="23dp"
         />

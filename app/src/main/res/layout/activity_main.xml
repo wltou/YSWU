@@ -17,21 +17,27 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#A0CDBB"
+            android:background="@color/main_toolbar"
             android:elevation="5dp"
             app:titleTextColor="#355E45"/>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewpager"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/viewpageandtabs">
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tabs"
-            app:tabMode="scrollable"/>
+            <com.google.android.material.tabs.TabLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tabs"
+                app:tabMode="scrollable"/>
+        </LinearLayout>
 
     </LinearLayout>
 

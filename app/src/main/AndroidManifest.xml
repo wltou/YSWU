@@ -16,6 +16,9 @@
         android:theme="@style/Theme.MediWithU"
         tools:targetApi="31">
         <activity
+            android:name=".WriteAddActivity"
+            android:exported="false" />
+        <activity
             android:name=".PartnerSettingActivity"
             android:exported="false" />
         <activity

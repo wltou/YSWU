@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/main_bg"
+    tools:context=".WriteAddActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        app:titleTextColor="@color/black" />
+
+    <Button
+        android:id="@+id/input_partner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/main_bg"
+        android:textColor="@color/black"
+        android:textAlignment="textStart"
+        android:textSize="15dp"
+        android:text="약속 친구 선택"/>
+
+    <Button
+        android:id="@+id/input_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/main_bg"
+        android:textColor="@color/black"
+        android:textAlignment="textStart"
+        android:textSize="15dp"
+        android:text="날짜 선택"/>
+
+    <EditText
+        android:id="@+id/addEditView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:hint="복약 일지를 작성해주세요."
+        android:gravity="left|top"/>
+
+</LinearLayout>
