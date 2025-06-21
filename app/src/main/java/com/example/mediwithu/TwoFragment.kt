@@ -26,6 +26,7 @@ class TwoFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    /*
     private val sidoMap = mapOf(
         "서울특별시" to "11",
         "부산광역시" to "26",
@@ -44,9 +45,9 @@ class TwoFragment : Fragment() {
         "경상북도" to "47",
         "경상남도" to "48",
         "제주특별자치도" to "50"
-    )
+    )*/
 
-    private fun getSidoCode(sidoName: String): String? = sidoMap[sidoName]
+    private fun getSidoCode(sidoName: String): String? = sidoName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,19 +89,18 @@ class TwoFragment : Fragment() {
                 putString("sgguCd", sgguInput)
             }
 
-            if (binding.rGroup.checkedRadioButtonId == R.id.rbHospital) {
-                hospitalfragment.arguments = bundle
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.activity_content, hospitalfragment)
-                    .commit()
-            } else if (binding.rGroup.checkedRadioButtonId == R.id.rbPharm) {
-                pharmfragment.arguments = bundle
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.activity_content, pharmfragment)
-                    .commit()
+            val targetFragment = if (binding.rGroup.checkedRadioButtonId == R.id.rbHospital) {
+                HospitalFragment()
+            } else {
+                PharmFragment()
+            }.apply {
+                arguments = bundle
             }
-        }
 
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.activity_content, targetFragment)
+                .commit()
+        }
 
         return binding.root
     }

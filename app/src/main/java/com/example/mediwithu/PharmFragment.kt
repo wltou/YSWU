@@ -82,6 +82,9 @@ class PharmFragment : Fragment() {
             }
         })
 
+        Log.d("PharmFragment", "arguments: sido=$sidoCode, sggu=$sgguCode")
+        Log.d("API_CALL", "Request URL: ${call.request()}")
+
         return binding.root
     }
 
