@@ -2,16 +2,21 @@ package com.example.mediwithu
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
@@ -23,6 +28,8 @@ import com.example.mediwithu.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.Firebase
+import com.google.firebase.messaging.messaging
 
 
 class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){
@@ -44,6 +51,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        /*
+        Firebase.messaging.token.addOnSuccessListener {
+            Log.d("25android", it)
+        }*/ //epAJvoR9Rfq6OA67tV6nWO:APA91bGnwA2WcxsGYLBNLgSp58pzwhDtjwfW8QoMUPU83tW6QaboqJSiz6mfpKRweS7Z3Elxcv64ODF9El-l9kEHefboYXePcCYNZJA7G7DnpmJvUHBTz2M
+        val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){
+            if(it.all{permission -> permission.value != true}){
+                //Toast.makeText(this, "permiaaion DENIED", Toast.LENGTH_SHORT).show()
+            }
+        }
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            if(ContextCompat.checkSelfPermission(this, "android.permission.POST_NOTIFICATION") != PackageManager.PERMISSION_GRANTED){
+                permissionLauncher.launch(arrayOf("android.permission.POST_NOTIFICATION"))
+            }
+        }
 
         sharedPreference = PreferenceManager.getDefaultSharedPreferences(this)
         val emailPre = sharedPreference.getString("id", "${MyApplication.email}")

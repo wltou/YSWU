@@ -8,4 +8,5 @@
     <color name="main_btn">#88BCA4</color>
     <color name="main_fab">#6BAE94</color>
     <color name="main_toolbar_text">#355E45</color>
+    <color name="colorAccent">#FFA000</color>
 </resources>

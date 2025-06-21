@@ -19,8 +19,7 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="23dp"
+        android:textSize="20dp"
         />
     <CheckBox
         android:id="@+id/item_check"

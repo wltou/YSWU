@@ -44,6 +44,7 @@ class WriteAddActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         sharedPreference = PreferenceManager.getDefaultSharedPreferences(this)
 
+        
         val partner_idPre = sharedPreference.getString("partner_id", "복약 파트너") ?: "복약 파트너"
 
         val items = arrayOf(partner_idPre)
@@ -90,6 +91,8 @@ class WriteAddActivity : AppCompatActivity() {
                     .add(data)
                     .addOnSuccessListener {
                         Toast.makeText(this, "data save OK", Toast.LENGTH_LONG).show()
+                        val helper = MyNotificationHelpher(this)
+                        helper.showNotification("MediWithU", "복약 일지 등록 완료")
                         finish()
                     }
                     .addOnFailureListener {
