@@ -1,5 +1,6 @@
 package com.example.mediwithu
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -56,6 +57,7 @@ class AuthActivity : AppCompatActivity() {
                         if(task.isSuccessful){
                             MyApplication.email = account.email
                             //changeVisibility("login")
+                            startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }else {
                             changeVisibility("logout")
@@ -116,6 +118,7 @@ class AuthActivity : AppCompatActivity() {
                         if(MyApplication.checkAuth()){
                             MyApplication.email = email
                             //changeVisibility("login")
+                            startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }else {
                             Toast.makeText(baseContext, "전송된 메일로 이메일 인증이 되지 않았습니다.", Toast.LENGTH_SHORT).show()

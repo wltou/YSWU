@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:background="#FF0000">
+    android:layout_height="250dp"
+    android:id="@+id/navigationheader"
+    android:background="@color/main_fab">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Navigation Title"
-        android:textColor="#FFFFFF"
+        android:text="MediWithU"
+        android:textColor="#EEEEEE"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="23dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="30dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="90dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profil_id"
+            android:text="내 이름"
+            android:textStyle="bold"
+            android:textColor="#EEEEEE"
+            android:textSize="20dp"
+            android:layout_marginBottom="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profil_partner"
+            android:text="약속 친구"
+            android:textColor="#EEEEEE"
+            android:textSize="17dp" />
+    </LinearLayout>
+
 
 </RelativeLayout>

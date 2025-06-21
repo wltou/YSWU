@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -52,6 +53,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val navigationView = findViewById<NavigationView>(R.id.drawer)
+        val headerView = navigationView.getHeaderView(0)
+        val headerIDText = headerView.findViewById<TextView>(R.id.profil_id)
+        val headerPartnerText = headerView.findViewById<TextView>(R.id.profil_partner)
+
         /*
         Firebase.messaging.token.addOnSuccessListener {
             Log.d("25android", it)
@@ -72,6 +78,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val idPre = sharedPreference.getString("id", "${emailPre}")
         val colorPre = sharedPreference.getString("color", "#355E45")
         val partner_idPre = sharedPreference.getString("partner_id", "복약 파트너")
+        headerIDText.text = idPre
+        headerPartnerText.text = partner_idPre
 
         binding.toolbar.setTitleTextColor(Color.parseColor(colorPre))
 
@@ -163,6 +171,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_partner -> {
                 val intent = Intent(this, PartnerSettingActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.nav_medicine -> {
+                val intent = Intent(this, MedicineListActivity::class.java)
                 startActivity(intent)
                 return true
             }

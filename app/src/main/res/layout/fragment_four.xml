@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:outlineAmbientShadowColor="@color/main_bg"
+    android:outlineAmbientShadowColor="@color/splash_bg_color"
     tools:context=".FourFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@color/main_bg"
+        android:background="@color/splash_bg_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/diaryRecyclerView"

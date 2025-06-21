@@ -96,8 +96,6 @@ class OneFragment : Fragment() {
             }
         binding.fab.setOnClickListener{
             val intent = Intent(it.context, AddActivity::class.java)
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            intent.putExtra("today", dateFormat.format(System.currentTimeMillis()))
             requestLauncher.launch(intent)
         }
 

@@ -46,27 +46,6 @@ class MyAdapter(val datas: MutableList<MyItem>): RecyclerView.Adapter<RecyclerVi
 }
 
 class MyDecoration(val context: Context): RecyclerView.ItemDecoration() {
-    // onDrawOver () : ItemView -> KBO
-    //override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-    //    super.onDrawOver(c, parent, state)
-
-    // onDraw() : KBO -> ItemView
-    /*
-    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        super.onDraw(c, parent, state)
-
-        val width = parent.width
-        val height = parent.height
-
-        val dr: Drawable? = ResourcesCompat.getDrawable(context.resources, R.drawable.yswu_logo, null)
-        val drWidth = dr?.intrinsicWidth
-        val drHeight = dr?.intrinsicHeight
-
-        val left = width/2 - drWidth?.div(2) as Int
-        val top = height/2 - drHeight?.div(2) as Int
-
-        c.drawBitmap(BitmapFactory.decodeResource(context.resources, R.drawable.yswu_logo), left.toFloat(), top.toFloat(), null)
-    }*/
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -75,12 +54,6 @@ class MyDecoration(val context: Context): RecyclerView.ItemDecoration() {
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-
-        val index = parent.getChildAdapterPosition(view)+1
-        if(index % 3 == 0)
-            outRect.set(10, 10, 10, 60)
-        else
-            outRect.set(10, 10, 10, 0)
 
         view.setBackgroundColor(Color.parseColor("#CEDFD7"))
         ViewCompat.setElevation(view, 20.0f)

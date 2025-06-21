@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/main_bg">
+    android:background="@color/main_bg"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/add_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/main_toolbar"/>
+        android:backgroundTint="@color/main_toolbar" />
 
     <TextView
+        android:id="@+id/tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="약 등록"
-        android:textSize="15dp"
-        android:id="@+id/date"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="50dp"
-        android:textColor="@android:color/darker_gray"/>
+        android:layout_marginRight="20dp"
+        android:text="약 등록"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="15dp" />
 
     <EditText
         android:id="@+id/add_editView"
@@ -30,43 +30,46 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:inputType="text"/>
+        android:inputType="text" />
 
     <RadioGroup
+        android:id="@+id/rTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_margin="25dp"
-        android:id="@+id/rTime">
+        android:orientation="horizontal">
+
         <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:id="@+id/rTime1"
-            android:text="아침"
-            android:checked="true"/>
-        <RadioButton
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="true"
+            android:text="아침" />
+
+        <RadioButton
             android:id="@+id/rTime2"
-            android:text="점심"/>
-        <RadioButton
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="점심" />
+
+        <RadioButton
             android:id="@+id/rTime3"
-            android:text="저녁"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="저녁" />
     </RadioGroup>
 
 
     <Button
+        android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="200dp"
         android:layout_marginRight="20dp"
-        android:text="저장"
         android:backgroundTint="@color/main_btn"
-        android:id="@+id/btnSave"
-        android:layout_marginTop="200dp" />
+        android:text="저장" />
 </LinearLayout>

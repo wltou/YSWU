@@ -17,8 +17,6 @@ class AddActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val date = intent.getStringExtra("today")
-        binding.date.text = date
 
         binding.btnSave.setOnClickListener{
             val totake_str = binding.addEditView.text.toString()
@@ -34,6 +32,7 @@ class AddActivity : AppCompatActivity() {
 
             val intent = intent
             intent.putExtra("result", totake_str)
+            intent.putExtra("time", timeType)
             setResult(Activity.RESULT_OK, intent)
 
             finish()

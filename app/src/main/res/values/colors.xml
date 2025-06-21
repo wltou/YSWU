@@ -9,4 +9,5 @@
     <color name="main_fab">#6BAE94</color>
     <color name="main_toolbar_text">#355E45</color>
     <color name="colorAccent">#FFA000</color>
+    <color name="splash_bg_color">#F6F2E4</color>
 </resources>

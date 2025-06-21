@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingTop="100dp">
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="💊 약을 잊지 않도록,\n오랜 복약이 외롭지 않도록\n\n약속처럼 함께하며\n언제나 함께 해주세요"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_margin="15dp" />
+
+    <TextView
+        android:id="@+id/tvPromise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가족, 친구, 소중한 사람과\n건강한 하루를 오래오래 약속하세요."
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_margin="15dp" />
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingTop="100dp">
+
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MediWithU는 여러분을 위해\n매일의 건강을 함께 지켜드릴게요."
+            android:textSize="17dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_margin="15dp" />
+
+        <TextView
+            android:id="@+id/tvPromise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="“함께 약속해요.\n오래 함께하기 위해, 오늘도 함께합니다.”"
+            android:textSize="19dp"
+            android:textStyle="italic"
+            android:textColor="@color/main_toolbar_text"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_margin="15dp" />
+
+</LinearLayout>
