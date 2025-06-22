@@ -16,6 +16,7 @@ class HospitalAdapter(private val datas: MutableList<myHospitalItem>?) :
             binding.tvHospitalPhone.text = item.telno ?: "전화번호 없음"
             binding.tvHoapitalWeb.text = item.hospUrl ?: "홈페이지 없음"
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HospitalViewHolder {

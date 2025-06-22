@@ -66,6 +66,10 @@ class HospitalFragment : Fragment() {
                 } else {
                     Toast.makeText(context, "병원 정보 불러오기 실패", Toast.LENGTH_SHORT).show()
                     Log.e("API_ERROR", "Response code: ${response.code()}, message: ${response.message()}")
+                    val sidoCd = arguments?.getString("sidoCd") ?: ""
+                    val sgguCd = arguments?.getString("sgguCd") ?: ""
+                    Log.d("HospitalFragment", "arguments: sido=$sidoCd, sggu=$sgguCd")
+                    Log.d("API_CALL", "Request URL: ${call.request()}")
                 }
             }
 

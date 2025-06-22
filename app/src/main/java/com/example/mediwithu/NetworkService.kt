@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NetworkService {
-    @GET("getHospList")
+    @GET("getHospBasisList")
     fun getHospitalList(
         @Query("serviceKey", encoded = true) serviceKey: String,
         @Query("sidoCd") sidoCd: String? = null,

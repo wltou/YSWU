@@ -1,6 +1,7 @@
 package com.example.mediwithu
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,28 +27,30 @@ class TwoFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    /*
-    private val sidoMap = mapOf(
-        "서울특별시" to "11",
-        "부산광역시" to "26",
-        "대구광역시" to "27",
-        "인천광역시" to "28",
-        "광주광역시" to "29",
-        "대전광역시" to "30",
-        "울산광역시" to "31",
-        "세종특별자치시" to "36",
-        "경기도" to "41",
-        "강원도" to "42",
-        "충청북도" to "43",
-        "충청남도" to "44",
-        "전라북도" to "45",
-        "전라남도" to "46",
-        "경상북도" to "47",
-        "경상남도" to "48",
-        "제주특별자치도" to "50"
-    )*/
 
-    private fun getSidoCode(sidoName: String): String? = sidoName
+    private val sidoMap = mapOf(
+        "서울특별시" to "110000",
+        "부산광역시" to "260000",
+        "대구광역시" to "270000",
+        "인천광역시" to "280000",
+        "광주광역시" to "290000",
+        "대전광역시" to "300000",
+        "울산광역시" to "310000",
+        "세종특별자치시" to "360000",
+        "경기도" to "410000",
+        "강원도" to "420000",
+        "충청북도" to "430000",
+        "충청남도" to "440000",
+        "전라북도" to "450000",
+        "전라남도" to "460000",
+        "경상북도" to "470000",
+        "경상남도" to "480000",
+        "제주특별자치도" to "500000"
+    )
+
+    private fun getSidoCode(sidoName: String): String? {
+        return sidoMap[sidoName]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +81,11 @@ class TwoFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val sidoCode = getSidoCode(sidoInput)
+            val sidoCode = if (binding.rGroup.checkedRadioButtonId == R.id.rbHospital) {
+                getSidoCode(sidoInput)
+            } else {
+                sidoInput
+            }
 
             if (sidoCode == null) {
                 Toast.makeText(requireContext(), "입력한 지역명이 올바르지 않습니다", Toast.LENGTH_SHORT).show()
@@ -101,6 +108,7 @@ class TwoFragment : Fragment() {
                 .replace(R.id.activity_content, targetFragment)
                 .commit()
         }
+
 
         return binding.root
     }
