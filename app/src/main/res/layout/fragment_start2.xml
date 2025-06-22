@@ -11,12 +11,12 @@
             android:id="@+id/tvWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MediWithU는 여러분을 위해\n매일의 건강을 함께 지켜드릴게요."
+            android:text="MediWithU가 여러분을 위해\n매일의 건강을 함께할게요."
             android:textSize="17dp"
             android:textColor="@color/black"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:layout_margin="15dp" />
+            android:layout_margin="45dp" />
 
         <TextView
             android:id="@+id/tvPromise"
@@ -27,7 +27,6 @@
             android:textStyle="italic"
             android:textColor="@color/main_toolbar_text"
             android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:layout_margin="15dp" />
+            android:gravity="center" />
 
 </LinearLayout>
